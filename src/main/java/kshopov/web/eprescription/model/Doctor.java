@@ -1,12 +1,17 @@
 package kshopov.web.eprescription.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @Entity
 public class Doctor extends BaseEntity {
 
 	private String email;
-//	private TypeOfSender typeOfSender;
+	
+	@Enumerated(EnumType.STRING)
+	private TypeOfSender typeOfSender;
+	
 	private String uin;
 	private String rcz;
 	private String lzName;
@@ -79,4 +84,12 @@ public class Doctor extends BaseEntity {
 		this.token = token;
 	}
 
+	public TypeOfSender getTypeOfSender() {
+		return typeOfSender;
+	}
+
+	public void setTypeOfSender(TypeOfSender typeOfSender) {
+		this.typeOfSender = typeOfSender;
+	}
+	
 }
