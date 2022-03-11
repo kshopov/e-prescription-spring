@@ -1,15 +1,14 @@
 package kshopov.web.eprescription.model;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Doctor extends BaseEntity {
 
 	private String email;
 	
-	@Enumerated(EnumType.STRING)
+	@OneToOne
 	private TypeOfSender typeOfSender;
 	
 	private String uin;
