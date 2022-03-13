@@ -11,4 +11,9 @@ public class IndexController {
 		return "index/index";
 	}
 	
+	@GetMapping({"register", "register.html"})
+	public String register() {
+		return "index/register";
+	}
+	
 }
