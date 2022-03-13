@@ -38,6 +38,15 @@
     border-color: grey;
 }
 
+.formField {
+	margin-bottom: -10px; 
+	font-size: 0.9rem
+}
+
+p.error {
+	color: red;
+}
+
 .ui-autocomplete
 {
     position:absolute;
