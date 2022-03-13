@@ -1,22 +1,57 @@
 package kshopov.web.eprescription.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.ColumnDefault;
+import org.springframework.lang.NonNull;
 
 @Entity
 public class Doctor extends BaseEntity {
 
+	@Column(unique = true)
+	@NonNull
+	@NotEmpty
+	@Email
 	private String email;
 	
 	@OneToOne
+	@ColumnDefault(value = "1")
 	private TypeOfSender typeOfSender;
 	
+	@Size(min = 8, max = 10)
+	@NotNull
+	@NotEmpty
 	private String uin;
+	
+	@Size(min = 8, max = 10)
+	@NotNull
+	@NotEmpty
 	private String rcz;
+	
+	@Size(max = 500)
+	@NotNull
+	@NotEmpty
 	private String lzName;
+	
+	@Size(min = 8, max = 30)
+	@NotNull
+	@NotEmpty
 	private String password;
+	
+	@Size(min = 10, max = 15)
+	@NotEmpty
 	private String phone;
+	
+	@ColumnDefault(value = "0")
 	private int isVerified;
+	
+	
 	private String token;
 
 	public String getEmail() {
