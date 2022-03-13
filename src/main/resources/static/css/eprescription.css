@@ -1,0 +1,46 @@
+.navbar-light {
+	background-color: #e3f2fd;
+}
+
+.form {
+    background-color: #e3f2fd;
+    border-radius: 10px;
+}
+
+.formrow {
+    margin-top: 50px; 
+    border-top:1px solid; 
+    border-left:1px solid; 
+    border-right:1px solid; 
+    border-color: grey;
+}
+
+.formrowwotop {
+    border-left:1px solid; 
+    border-right:1px solid; 
+    border-color: grey;
+}
+
+.form-prescription {
+    margin-top: 50px;
+    border-top: solid 1px;
+    border-left: solid 1px;
+    border-right: solid 1px;
+    border-bottom: solid 1px;
+    border-color: #cccccc;
+    padding: 20px;
+}
+
+.formbottom {
+    border-left:1px solid; 
+    border-right:1px solid; 
+    border-bottom:1px solid; 
+    border-color: grey;
+}
+
+.ui-autocomplete
+{
+    position:absolute;
+    cursor:default;
+    z-index:1001 !important
+}
