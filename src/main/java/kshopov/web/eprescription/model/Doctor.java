@@ -16,42 +16,42 @@ public class Doctor extends BaseEntity {
 
 	@Column(unique = true)
 	@NonNull
-	@NotEmpty
-	@Email
+	@NotEmpty(message = "{email.not.empty}")
+	@Email(message = "{email.not.valid}")
 	private String email;
+	
+	@Size(min = 8, max = 30, message = "{password.size}")
+	@NotNull
+	@NotEmpty(message = "{password.not.empty}")
+	private String password;
+	
+	@Size(max = 500, message = "{lzName.max.size}")
+	@NotNull
+	@NotEmpty(message = "{lzName.not.empty}")
+	private String lzName;
+	
+	@Size(min = 10, max = 10, message = "{rcz.size}")
+	@NotNull
+	@NotEmpty(message = "{rcz.not.empty}")
+	private String rcz;
+	
+	
+	@Size(min = 8, max = 10, message = "{uin.size}")
+	@NotNull
+	@NotEmpty(message = "{uin.not.empty}")
+	private String uin;
+	
+	@Size(min = 10, max = 15, message = "{phone.size}")
+	@NotEmpty(message = "{phone.not.empty}")
+	private String phone;
 	
 	@OneToOne
 	@ColumnDefault(value = "1")
 	private TypeOfSender typeOfSender;
-	
-	@Size(min = 8, max = 10)
-	@NotNull
-	@NotEmpty
-	private String uin;
-	
-	@Size(min = 8, max = 10)
-	@NotNull
-	@NotEmpty
-	private String rcz;
-	
-	@Size(max = 500)
-	@NotNull
-	@NotEmpty
-	private String lzName;
-	
-	@Size(min = 8, max = 30)
-	@NotNull
-	@NotEmpty
-	private String password;
-	
-	@Size(min = 10, max = 15)
-	@NotEmpty
-	private String phone;
-	
+
 	@ColumnDefault(value = "0")
 	private int isVerified;
-	
-	
+
 	private String token;
 
 	public String getEmail() {
@@ -62,20 +62,12 @@ public class Doctor extends BaseEntity {
 		this.email = email;
 	}
 
-	public String getUin() {
-		return uin;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setUin(String uin) {
-		this.uin = uin;
-	}
-
-	public String getRcz() {
-		return rcz;
-	}
-
-	public void setRcz(String rcz) {
-		this.rcz = rcz;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getLzName() {
@@ -86,12 +78,20 @@ public class Doctor extends BaseEntity {
 		this.lzName = lzName;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getRcz() {
+		return rcz;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setRcz(String rcz) {
+		this.rcz = rcz;
+	}
+
+	public String getUin() {
+		return uin;
+	}
+
+	public void setUin(String uin) {
+		this.uin = uin;
 	}
 
 	public String getPhone() {
@@ -100,6 +100,14 @@ public class Doctor extends BaseEntity {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public TypeOfSender getTypeOfSender() {
+		return typeOfSender;
+	}
+
+	public void setTypeOfSender(TypeOfSender typeOfSender) {
+		this.typeOfSender = typeOfSender;
 	}
 
 	public int getIsVerified() {
@@ -118,12 +126,4 @@ public class Doctor extends BaseEntity {
 		this.token = token;
 	}
 
-	public TypeOfSender getTypeOfSender() {
-		return typeOfSender;
-	}
-
-	public void setTypeOfSender(TypeOfSender typeOfSender) {
-		this.typeOfSender = typeOfSender;
-	}
-	
 }
