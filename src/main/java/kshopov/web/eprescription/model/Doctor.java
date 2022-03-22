@@ -11,6 +11,15 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.lang.NonNull;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@EqualsAndHashCode
 @Entity
 public class Doctor extends BaseEntity {
 
@@ -53,77 +62,4 @@ public class Doctor extends BaseEntity {
 	private int isVerified;
 
 	private String token;
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getLzName() {
-		return lzName;
-	}
-
-	public void setLzName(String lzName) {
-		this.lzName = lzName;
-	}
-
-	public String getRcz() {
-		return rcz;
-	}
-
-	public void setRcz(String rcz) {
-		this.rcz = rcz;
-	}
-
-	public String getUin() {
-		return uin;
-	}
-
-	public void setUin(String uin) {
-		this.uin = uin;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public TypeOfSender getTypeOfSender() {
-		return typeOfSender;
-	}
-
-	public void setTypeOfSender(TypeOfSender typeOfSender) {
-		this.typeOfSender = typeOfSender;
-	}
-
-	public int getIsVerified() {
-		return isVerified;
-	}
-
-	public void setIsVerified(int isVerified) {
-		this.isVerified = isVerified;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
-
 }
