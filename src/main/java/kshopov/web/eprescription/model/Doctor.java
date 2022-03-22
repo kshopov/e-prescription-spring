@@ -2,6 +2,8 @@ package kshopov.web.eprescription.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -54,9 +56,8 @@ public class Doctor extends BaseEntity {
 	@NotEmpty(message = "{phone.not.empty}")
 	private String phone;
 	
-	@OneToOne
-	@ColumnDefault(value = "1")
-	private TypeOfSender typeOfSender;
+	@Enumerated(EnumType.STRING)
+	private UserType typeOfSender;
 
 	@ColumnDefault(value = "0")
 	private int isVerified;
