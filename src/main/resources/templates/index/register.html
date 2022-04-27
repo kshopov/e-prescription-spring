@@ -17,7 +17,7 @@
 						</div>
 					</div>
 					<div style="padding-top: 30px" class="panel-body">
-						<form action="#" th:action="@{/register}" th:object="${doctor}" method="post">
+						<form th:action="@{/process_register}" th:object="${doctor}" method="post">
 							<div>
 								<label class="formField" for="email">Email*</label>
 								<input id="email" type="text" class="form-control" name="email" th:field="*{email}">
