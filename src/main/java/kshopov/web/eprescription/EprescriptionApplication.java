@@ -14,11 +14,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
+import kshopov.web.eprescription.security.config.WebSecurityConfig;
+
 @SpringBootApplication
 public class EprescriptionApplication implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EprescriptionApplication.class, args);
+		SpringApplication.run(new Class[] { EprescriptionApplication.class, WebSecurityConfig.class }, args);
 	}
 
 	@Bean
