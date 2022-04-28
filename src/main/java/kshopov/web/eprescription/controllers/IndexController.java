@@ -11,14 +11,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import kshopov.web.eprescription.model.Doctor;
 import kshopov.web.eprescription.repositories.DoctorRepository;
+import kshopov.web.eprescription.services.DoctorService;
+import kshopov.web.eprescription.validation.EmailExistsException;
 
 @Controller
 public class IndexController implements WebMvcConfigurer{
 	
 	private final DoctorRepository doctorRepository;
 	
-	public IndexController(DoctorRepository doctorRepository) {
+	private final DoctorService doctorService;
+	
+	public IndexController(DoctorRepository doctorRepository, DoctorService doctorService) {
 		this.doctorRepository = doctorRepository;
+		this.doctorService = doctorService;
 	}
 
 	@Override
@@ -31,22 +36,27 @@ public class IndexController implements WebMvcConfigurer{
 		return "index/index";
 	}
 	
+	@GetMapping("/login")
+	public String list() {
+		return "loginPage";
+	}
+	
 	@GetMapping({"register", "register.html"})
 	public String register(Doctor doctor) {
 		return "index/register";
 	}
 	
-	@PostMapping({"process_register", "process_register.html"})
+	@PostMapping({"register"})
 	public String processRegistration(@Valid Doctor doctor, 
-			BindingResult bindingResult) {
+			BindingResult bindingResult) throws EmailExistsException {
 		
 		if(bindingResult.hasErrors()) {
 			return "index/register";
 		}
 		
-		doctorRepository.save(doctor);
+		doctorService.registerNewUser(doctor);
 		
-		return "redirect:/successful_registration";
+		return "redirect:/login";
 	}
 	
 }
