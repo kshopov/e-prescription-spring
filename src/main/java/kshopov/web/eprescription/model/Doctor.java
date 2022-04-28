@@ -28,7 +28,7 @@ public class Doctor extends BaseEntity {
 	@Email(message = "{email.not.valid}")
 	private String email;
 	
-	@Size(min = 8, max = 30, message = "{password.size}")
+	@Size(min = 8, max = 255, message = "{password.size}")
 	@NotNull
 	@NotEmpty(message = "{password.not.empty}")
 	private String password;
