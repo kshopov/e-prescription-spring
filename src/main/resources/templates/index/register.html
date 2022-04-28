@@ -3,8 +3,7 @@
 <head th:replace="fragments/headerNotLoggedIn :: html_head">
 </head>
 <body>
-	<div th:replace="fragments/headerNotLoggedIn :: header">Static
-		header</div>
+
 	<div class="container">
 		<div class="row" style="margin-top: 50px">
 			<div class="col"></div>
@@ -17,7 +16,7 @@
 						</div>
 					</div>
 					<div style="padding-top: 30px" class="panel-body">
-						<form th:action="@{/process_register}" th:object="${doctor}" method="post">
+						<form th:action="@{/register}" th:object="${doctor}" method="post">
 							<div>
 								<label class="formField" for="email">Email*</label>
 								<input id="email" type="text" class="form-control" name="email" th:field="*{email}">
