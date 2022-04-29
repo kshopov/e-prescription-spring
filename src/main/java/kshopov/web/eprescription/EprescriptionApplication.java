@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
-import kshopov.web.eprescription.security.config.WebSecurityConfig;
+import kshopov.web.eprescription.security.WebSecurityConfig;
 
 @SpringBootApplication
 public class EprescriptionApplication implements WebMvcConfigurer {
