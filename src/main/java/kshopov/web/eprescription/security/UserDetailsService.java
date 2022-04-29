@@ -1,4 +1,4 @@
-package kshopov.web.eprescription.services;
+package kshopov.web.eprescription.security;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -29,7 +29,7 @@ public class UserDetailsService implements org.springframework.security.core.use
 			throw new UsernameNotFoundException("Не успяхме да намерим потребител с мейл: " + username);
 		}
 		
-		return new org.springframework.security.core.userdetails.User(doctor.getEmail(), doctor.getPassword(), true, true, true, true, getAuthorities("ROLE_USER"));
+		return new org.springframework.security.core.userdetails.User(doctor.getEmail(), doctor.getPassword(), doctor.isVerified(), true, true, true, getAuthorities("ROLE_USER"));
 	}
 	
 	private Collection<? extends GrantedAuthority> getAuthorities(String role) {
