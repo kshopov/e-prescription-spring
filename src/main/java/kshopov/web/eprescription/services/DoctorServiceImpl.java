@@ -2,11 +2,11 @@ package kshopov.web.eprescription.services;
 
 import javax.transaction.Transactional;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kshopov.web.eprescription.model.Doctor;
 import kshopov.web.eprescription.repositories.DoctorRepository;
+import kshopov.web.eprescription.security.PasswordEncoder;
 import kshopov.web.eprescription.validation.EmailExistsException;
 
 @Service
@@ -27,7 +27,7 @@ public class DoctorServiceImpl implements DoctorService {
         if (emailExist(doctor.getEmail())) {
             throw new EmailExistsException("There is an account with that email address: " + doctor.getEmail());
         }
-        doctor.setPassword(passwordEncoder.encode(doctor.getPassword()));
+        doctor.setPassword(passwordEncoder.bCryptPasswordEncoder().encode(doctor.getPassword()));
         return repository.save(doctor);
 	}
 
