@@ -30,7 +30,7 @@ public class DoctorRepositoryTest {
 		Doctor doctor = new Doctor();
 		
 		doctor.setEmail("k.shopov@nisetbg.com");
-		doctor.setIsVerified(0);
+		doctor.setVerified(false);
 		doctor.setLzName("Niset");
 		doctor.setPassword("4567465465");
 		doctor.setPhone("0885474879");
