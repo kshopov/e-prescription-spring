@@ -9,7 +9,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.springframework.lang.NonNull;
 
 import lombok.Getter;
@@ -56,8 +55,9 @@ public class Doctor extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private UserType typeOfSender;
 
-	@ColumnDefault(value = "0")
-	private int isVerified;
+	private boolean isVerified;
 
 	private String token;
+	
+	private String passwordConfirmation;
 }
