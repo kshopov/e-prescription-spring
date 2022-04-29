@@ -1,5 +1,7 @@
 package kshopov.web.eprescription.controllers;
 
+import java.util.UUID;
+
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -10,7 +12,9 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import kshopov.web.eprescription.model.Doctor;
+import kshopov.web.eprescription.model.VerificationToken;
 import kshopov.web.eprescription.repositories.DoctorRepository;
+import kshopov.web.eprescription.repositories.VerificationTokenRepository;
 import kshopov.web.eprescription.services.DoctorService;
 import kshopov.web.eprescription.validation.EmailExistsException;
 
@@ -18,12 +22,15 @@ import kshopov.web.eprescription.validation.EmailExistsException;
 public class IndexController implements WebMvcConfigurer{
 	
 	private final DoctorRepository doctorRepository;
+	private final VerificationTokenRepository verificationTokenRepository;
 	
 	private final DoctorService doctorService;
 	
-	public IndexController(DoctorRepository doctorRepository, DoctorService doctorService) {
+	public IndexController(DoctorRepository doctorRepository, DoctorService doctorService,
+			VerificationTokenRepository verificationTokenRepository) {
 		this.doctorRepository = doctorRepository;
 		this.doctorService = doctorService;
+		this.verificationTokenRepository = verificationTokenRepository;
 	}
 
 	@Override
@@ -54,7 +61,13 @@ public class IndexController implements WebMvcConfigurer{
 			return "index/register";
 		}
 		
+		doctor.setVerified(false);
 		doctorService.registerNewUser(doctor);
+		
+		
+		final String token = UUID.randomUUID().toString();
+		final VerificationToken myToken = new VerificationToken(token, doctor);
+		verificationTokenRepository.save(myToken);
 		
 		return "redirect:/login";
 	}
