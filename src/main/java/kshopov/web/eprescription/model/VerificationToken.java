@@ -11,9 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class VerificationToken {
 	
 	public VerificationToken(String token, Doctor doctor) {
