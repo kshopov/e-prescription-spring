@@ -52,10 +52,17 @@ public class DoctorServiceImpl implements DoctorService {
     public void saveRegisteredUser(Doctor doctor) {
         doctorRepository.save(doctor);
     }
+
+    @Override
+    public Doctor findDoctorByEmail(String email) {
+        return doctorRepository.findByEmail(email);
+    }
 	
     private boolean emailExist(String email) {
         final Doctor user = doctorRepository.findByEmail(email);
         return user != null;
     }
+
+
 
 }
