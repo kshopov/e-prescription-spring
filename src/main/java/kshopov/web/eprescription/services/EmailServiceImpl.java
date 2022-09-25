@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailServiceImpl implements EmailService {
 
+	public static final String NO_REPLY_EMAIL = "noreplay@e-lekar.net";
+
 	private final JavaMailSender emailSender;
 	
 	public EmailServiceImpl(JavaMailSender emailSender) {
@@ -16,7 +18,7 @@ public class EmailServiceImpl implements EmailService {
 	@Override
 	public void sendSimpleMessage(String to, String subject, String text) {
 		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom("noreplay@e-lekar.net");
+		message.setFrom(NO_REPLY_EMAIL);
 		message.setTo(to);
 		message.setText(text);
 		emailSender.send(message);
