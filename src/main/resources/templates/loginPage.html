@@ -13,7 +13,7 @@
 		        <div class="panel panel-info">
 	                <div class="panel-heading">
 	                    <div class="panel-title" style="margin-top: 10px; font-size: 1.6rem;">Вход в E-рецепта</div>
-	                    <div style="float:right; font-size: 80%; position: relative; top:-30px"><a href="#">Забравена парола?</a></div>
+	                    <div style="float:right; font-size: 80%; position: relative; top:-30px"><a th:href="@{/forgotPassword}">Забравена парола?</a></div>
 	                </div>
 				</div>
 				<form th:action="@{/doLogin}" method="post" class="form-horizontal">
@@ -35,7 +35,7 @@
 		        </form>
                     <div class="form-group">
                         <div class="col-md-12 control">
-                            <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
+                            <div style="border-top: 1px solid #888; padding-top:15px; font-size:85%">
                                 Нямате акаунт!
                                 <a href="/register">
                                     Регистрирайте се
@@ -44,7 +44,7 @@
                         </div>
                     </div>
 		        <div th:if="${param.error}" class="alert alert-danger">Невалидно потребителско име или парола.</div>
-		        <div th:if="${param.logout}" class="alert alert-success">Излезнахте от системата.</div>
+		        <div th:if="${param.logout}" class="alert alert-success">Излязохте от системата.</div>
                 <div th:if="${message}" th:text="${message}" class="alert alert-success">Message</div>
                 <div th:if="${errorMessage}" th:text="${errorMessage}" class="alert alert-danger">Error Message</div>
 			</div>
