@@ -6,6 +6,8 @@ import kshopov.web.eprescription.validation.EmailExistsException;
 
 public interface DoctorService {
 	
+    Doctor findDoctorByEmail(String email);
+
     Doctor registerNewUser(Doctor doctor) throws EmailExistsException;
 
     Doctor updateExistingUser(Doctor doctor) throws EmailExistsException;
