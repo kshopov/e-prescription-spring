@@ -57,12 +57,16 @@ public class DoctorServiceImpl implements DoctorService {
     public Doctor findDoctorByEmail(String email) {
         return doctorRepository.findByEmail(email);
     }
+
+    @Override
+    public void savePassword(Doctor doctor) {
+        doctor.setPassword(passwordEncoder.bCryptPasswordEncoder().encode(doctor.getPassword()));
+        doctorRepository.save(doctor);
+    }
 	
     private boolean emailExist(String email) {
         final Doctor user = doctorRepository.findByEmail(email);
         return user != null;
     }
-
-
 
 }
