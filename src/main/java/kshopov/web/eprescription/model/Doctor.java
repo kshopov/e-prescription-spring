@@ -42,7 +42,6 @@ public class Doctor extends BaseEntity {
 	@NotEmpty(message = "{rcz.not.empty}")
 	private String rcz;
 	
-	
 	@Size(min = 8, max = 10, message = "{uin.size}")
 	@NotNull
 	@NotEmpty(message = "{uin.not.empty}")
