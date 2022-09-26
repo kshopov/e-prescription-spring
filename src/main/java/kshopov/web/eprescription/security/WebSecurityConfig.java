@@ -38,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					"/register", 
 					"/registrationConfirm",
 					"/forgotPassword",
-					"/doctor/resetPassword")
+					"/resetPassword")
 				.permitAll()
 				.anyRequest().authenticated()
 			.and()
