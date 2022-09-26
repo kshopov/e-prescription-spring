@@ -73,66 +73,13 @@ public class RegistrationController {
 	
 			emailService.sendSimpleMessage(doctor.getEmail(), "Потвърждение на акаунт", 
 					"На следния адрес може да потвърдите Вашия акаунт " +
-							this.generateUrl(request, "registrationConfirm", token));
+							emailService.urlGenerator(request, "registrationConfirm", token));
 		} catch (EmailExistsException e) {
 			bindingResult.addError(new FieldError("doctor", "email", e.getMessage()));
 			return "index/register";
 		}
 
 		return "redirect:/login";
-	}
-
-
-	@GetMapping("/forgotPassword")
-	public String forgotPassword()
-	{
-		return "forgotPassword";
-	}
-
-	@PostMapping("/doctor/resetPassword")
-	public ModelAndView resetPassword(HttpServletRequest request, 
-				@RequestParam("email") String userEmail, 
-				RedirectAttributes redirectAttributes) {
-		final Doctor doctor = doctorService.findDoctorByEmail(userEmail);
-
-		if(doctor != null) {
-			final String token = UUID.randomUUID().toString();
-			final PasswordResetToken myToken = new PasswordResetToken(token, doctor);
-			passwordResetTokenRepository.save(myToken);
-			
-			emailService.sendSimpleMessage(doctor.getEmail(), "Възстановяване на парола", 
-					"На следния адрес може да възстановите Вашата парола " + 
-					this.generateUrl(request, "doctor/resetPassword", token));
-		}
-
-		redirectAttributes.addFlashAttribute("message",
-				"На предоставения от вас email адрес е изпратена заявка за промяна на парола");
-		return new ModelAndView("redirect:/login");
-	}
-
-	@GetMapping(value =  "/doctor/resetPassword")
-	public ModelAndView resetPassword(@RequestParam("token") final String token, final RedirectAttributes attributes) {
-		final Doctor doctor = passwordResetTokenRepository.findByToken(token).getDoctor();
-
-		final Authentication auth = new UsernamePasswordAuthenticationToken(doctor, null,
-				userDetailsService.loadUserByUsername(doctor.getEmail()).getAuthorities());
-		SecurityContextHolder.getContext().setAuthentication(auth);
-
-		return new ModelAndView("resetPassword");
-	}
-
-	@PostMapping("/doctor/savePassword")
-	@ResponseBody
-	public ModelAndView savePassword(@RequestParam("password") final String password,
-									 @RequestParam("passwordConfirmation") final String passwordConfirmation,
-									 final RedirectAttributes redirectAttributes) {
-		final Doctor doctor = (Doctor) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		doctor.setPassword(password);
-		doctor.setPasswordConfirmation(passwordConfirmation);
-		doctorService.savePassword(doctor);
-
-		redirectAttributes.addFlashAttribute("message", "Промяната на парола е успешна.");
-		return new ModelAndView("redirect:/login");
 	}
 
 	@GetMapping(value = "registrationConfirm")
@@ -153,14 +100,4 @@ public class RegistrationController {
 
 			return new ModelAndView("redirect:/login");
 	}
-
-
-	private String generateUrl(HttpServletRequest request, String url, String token) {
-		return "http://" + request.getServerName() 
-			+ ":" + request.getServerPort() 
-			+ request.getContextPath() 
-			+ "/" + url + "?token="
-			+ token;
-	}
-
 }
