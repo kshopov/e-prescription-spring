@@ -4,6 +4,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Service
 public class EmailServiceImpl implements EmailService {
 
@@ -24,4 +26,12 @@ public class EmailServiceImpl implements EmailService {
 		emailSender.send(message);
 	}
 
+	@Override
+	public String urlGenerator(HttpServletRequest request, String url, String token) {
+		 return "http://" + request.getServerName()
+				+ ":" + request.getServerPort()
+				+ request.getContextPath()
+				+ "/" + url + "?token="
+				+ token;
+	}
 }
