@@ -2,9 +2,13 @@ package kshopov.web.eprescription.controllers;
 
 import java.util.UUID;
 
+import javax.print.Doc;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +16,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -27,15 +32,10 @@ import kshopov.web.eprescription.validation.EmailExistsException;
 
 @Controller
 public class RegistrationController {
-	
 	private final VerificationTokenRepository verificationTokenRepository;
-
 	private final EmailService emailService;
-	
 	private final DoctorService doctorService;
-
 	private final PasswordResetTokenRepository passwordResetTokenRepository;
-
 	private final UserDetailsService userDetailsService;
 	
 	public RegistrationController(DoctorService doctorService,
@@ -72,7 +72,8 @@ public class RegistrationController {
 			verificationTokenRepository.save(myToken);
 	
 			emailService.sendSimpleMessage(doctor.getEmail(), "Потвърждение на акаунт", 
-					"На следния адрес може да потвърдите Вашия акаунт " + this.generateUrl(request, "registrationConfirm", token));
+					"На следния адрес може да потвърдите Вашия акаунт " +
+							this.generateUrl(request, "registrationConfirm", token));
 		} catch (EmailExistsException e) {
 			bindingResult.addError(new FieldError("doctor", "email", e.getMessage()));
 			return "index/register";
@@ -101,20 +102,37 @@ public class RegistrationController {
 			
 			emailService.sendSimpleMessage(doctor.getEmail(), "Възстановяване на парола", 
 					"На следния адрес може да възстановите Вашата парола " + 
-					this.generateUrl(request, "doctor/changePassword", token));
+					this.generateUrl(request, "doctor/resetPassword", token));
 		}
 
+		redirectAttributes.addFlashAttribute("message",
+				"На предоставения от вас email адрес е изпратена заявка за промяна на парола");
 		return new ModelAndView("redirect:/login");
 	}
 
 	@GetMapping(value =  "/doctor/resetPassword")
-	public String resetPassword(@RequestParam("id") final long id, 
-			@RequestParam("token") final String token, 
-			final RedirectAttributes attributes) {
+	public ModelAndView resetPassword(@RequestParam("token") final String token, final RedirectAttributes attributes) {
 		final Doctor doctor = passwordResetTokenRepository.findByToken(token).getDoctor();
 
-		//final AuthenticateAction auth = new UsernamePasswordAuthenticationToken(doctor, null, userDetailsService.loadUserByUsername(doctor.getEmail()));
-		return "resetPassword";
+		final Authentication auth = new UsernamePasswordAuthenticationToken(doctor, null,
+				userDetailsService.loadUserByUsername(doctor.getEmail()).getAuthorities());
+		SecurityContextHolder.getContext().setAuthentication(auth);
+
+		return new ModelAndView("resetPassword");
+	}
+
+	@PostMapping("/doctor/savePassword")
+	@ResponseBody
+	public ModelAndView savePassword(@RequestParam("password") final String password,
+									 @RequestParam("passwordConfirmation") final String passwordConfirmation,
+									 final RedirectAttributes redirectAttributes) {
+		final Doctor doctor = (Doctor) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		doctor.setPassword(password);
+		doctor.setPasswordConfirmation(passwordConfirmation);
+		doctorService.savePassword(doctor);
+
+		redirectAttributes.addFlashAttribute("message", "Промяната на парола е успешна.");
+		return new ModelAndView("redirect:/login");
 	}
 
 	@GetMapping(value = "registrationConfirm")
