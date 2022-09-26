@@ -16,4 +16,7 @@ public interface DoctorService {
 
     void saveRegisteredUser(Doctor doctor);
 
+    void savePassword(Doctor doctor);
+
+
 }
