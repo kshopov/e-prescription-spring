@@ -46,8 +46,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.formLogin()
 				.loginPage("/login").permitAll()
 				.loginProcessingUrl("/doLogin")
+
 			.and()
-				.logout().permitAll().logoutRequestMatcher(new AntPathRequestMatcher("/doLogout", "GET"));
+			.logout().permitAll().logoutRequestMatcher(new AntPathRequestMatcher("/doLogout", "GET"))
+
+			.and()
+			.rememberMe()
+
+			.and()
+			.csrf().disable();
+
 	}// @formatter:on
 	
 }
