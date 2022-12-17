@@ -12,6 +12,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
+	/**
+	 *
+	 */
+	private static final String COOKIE_KEY = "kukurujuVaf1a";
+
 	private static final int SECONDS_IN_WEEK = 604800;
 
 	@Autowired
@@ -55,6 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.rememberMe()
 			.tokenValiditySeconds(SECONDS_IN_WEEK)
+			.key(COOKIE_KEY)
 
 			.and()
 			.csrf().disable();
