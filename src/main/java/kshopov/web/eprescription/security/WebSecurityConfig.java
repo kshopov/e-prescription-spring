@@ -12,7 +12,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
-    @Autowired
+	private static final int SECONDS_IN_WEEK = 604800;
+
+	@Autowired
     private UserDetailsService userDetailsService;
     
     private final PasswordEncoder passwordEncoder;
@@ -52,6 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 			.and()
 			.rememberMe()
+			.tokenValiditySeconds(SECONDS_IN_WEEK)
 
 			.and()
 			.csrf().disable();
