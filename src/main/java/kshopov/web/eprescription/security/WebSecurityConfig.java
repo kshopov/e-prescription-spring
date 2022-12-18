@@ -1,11 +1,15 @@
 package kshopov.web.eprescription.security;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.rememberme.*;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
@@ -22,9 +26,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
     
     private final PasswordEncoder passwordEncoder;
+
+	private final DataSource dataSource;
 	
-	public WebSecurityConfig(PasswordEncoder passwordEncoder) {
+	public WebSecurityConfig(PasswordEncoder passwordEncoder,
+			 DataSource dataSource) {
 		this.passwordEncoder = passwordEncoder;
+		this.dataSource = dataSource;
 	}
 
 	@Autowired
@@ -58,13 +66,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 			.and()
 			.rememberMe()
-			.tokenValiditySeconds(SECONDS_IN_WEEK)
-			.key(COOKIE_KEY)
-			.rememberMeCookieName(COOKIE_NAME)
+				.tokenRepository(persistentTokenRepository())
 
 			.and()
 			.csrf().disable();
 
 	}// @formatter:on
-	
+
+	@Bean
+	public PersistentTokenRepository persistentTokenRepository() {
+		final JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+		jdbcTokenRepository.setDataSource(dataSource);
+		return jdbcTokenRepository;
+	}
+
 }
