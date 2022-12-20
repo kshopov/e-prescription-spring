@@ -2,13 +2,9 @@ package kshopov.web.eprescription.controllers;
 
 import java.util.UUID;
 
-import javax.print.Doc;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,12 +12,10 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kshopov.web.eprescription.model.Doctor;
-import kshopov.web.eprescription.model.PasswordResetToken;
 import kshopov.web.eprescription.model.VerificationToken;
 import kshopov.web.eprescription.repositories.PasswordResetTokenRepository;
 import kshopov.web.eprescription.repositories.VerificationTokenRepository;
