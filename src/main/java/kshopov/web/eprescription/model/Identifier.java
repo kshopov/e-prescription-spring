@@ -1,18 +1,19 @@
 package kshopov.web.eprescription.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import java.time.LocalDate;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Identifier extends BaseEntity {
-
-    private String egn;
-    private String lnz;
-    private String ssn;
-    private String pass;
-    private String other;
-    private String nbn; //новородено
-
+    private String description;
+    private String descriptionEN;
+    private String sinceVersion;
+    private LocalDate validUntil;
 }
