@@ -2,15 +2,20 @@ package kshopov.web.eprescription.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import lombok.Data;
 
 @Data
 @Entity
 public class Patient extends BaseEntity {
-    
-    private IdentifierType indentifierType;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "identifier_id", referencedColumnName = "id")
+    private Identifier identifier;
     private String indetifier;
     private String nhifInsuranceNumber;
     private Date birthDate;
@@ -30,12 +35,6 @@ public class Patient extends BaseEntity {
     private double weight;
     private boolean isPregnant;
     private boolean isBreastFeeding;
-
-    //CL004
-    enum IdentifierType {
-        EGN, LNZ, SSN,
-        PASS, OTHER, NBN
-    }
 
     //CL001
     enum Gender {
