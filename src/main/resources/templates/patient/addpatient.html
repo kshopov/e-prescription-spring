@@ -3,10 +3,92 @@
 <head th:replace="fragments/header :: html_head">
 </head>
 <body>
-<div th:replace="fragments/header :: header">Static
-    header</div>
-<div class="container">
-    <h1>adding patient</h1>
+<div th:replace="fragments/header :: header">Static header</div>
+<div class="container form-prescription">
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <h4>Лични данни на пациент</h4>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <label for="indentifierType">Тип идентификатор</label>
+            <select id="indentifierType" name="indentifierType" onchange="emptyForm()" class="form-control">
+                <option value="1">ЕГН</option>
+                <option value="2">ЛНЧ</option>
+                <option value="3">Социален номер - за чужди граждани</option>
+                <option value="4">Номер на паспорт</option>
+                <option value="5">Друг идентификатор</option>
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="inputIdent" id="inputIdentLabel">ЕГН/ЛНЧ/SSN/Паспорт/Друг*</label>
+            <input type="text" class="form-control" id="inputIdent" oninput="validateIdentity()" name="inputIdent"
+                   value="">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="inputBirthdate">Дата на раждане*</label>
+            <input type="text" class="form-control" id="inputBirthdate" name="inputBirthdate"
+                   value="">
+            <label style="font-size: 0.7em;" for="inputBirthdate">Формат(ГГГГ-ММ-ДД)</label>
+        </div>
+        <div class="form-group col-md-1">
+            <label for="inputGender">Пол*</label>
+            <select name="selectGender" id="selectGender" class="form-control">
+                <option value=""></option>
+                <option value="1">Мъж</option>
+                <option value="2">Жена</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="inputFName" id="inputFNameLabel">Име*</label>
+            <input type="text" class="form-control" id="inputFName" name="inputFName" oninput="validateFirtsName()" value="">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="inputMName" id="inputMNameLabel">Презиме</label>
+            <input type="text" class="form-control" id="inputMName" name="inputMName" oninput="validateMidName()" value="">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="inputLName" id="inputLNameLable">Фамилия*</label>
+            <input type="text" class="form-control" id="inputLName" name="inputLName" oninput="validateLastName()" value="">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="inputAddress">Телефон</label>
+            <input type="text" class="form-control" id="inputPhone" name="inputPhone" value="">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="inputCountry">Държава</label>
+            <input type="text" class="form-control" id="inputCountry" name="inputCountry" value="">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="inputCountryCode">Код на държава*</label>
+            <input type="text" class="form-control" id="inputCountryCode" name="inputCountryCode" value="">
+        </div>
+        <div class="form-group col-md-5">
+            <label for="inputCity">Град*</label>
+            <input type="text" class="form-control" id="inputCity" name="inputCity" value="" >
+        </div>
+        <!-- <div class="form-group col-md-2">
+            <label for="inputPostalCode">Пощенски код</label>
+            <input type="text" class="form-control" id="inputPostalCode" name="inputPostalCode" value="<?php echo set_value('inputPostalCode') ?>">
+        </div> -->
+
+    </div>
+    <div class="form-row">
+        <div class="col-sm-6 controls">
+            <button type="submit" id="submitButton" class="btn" style="background-color: #456073; color: white;">
+                Добави
+            </button>
+        </div>
+    </div>
+    </form>
 </div>
 </body>
 </html>
