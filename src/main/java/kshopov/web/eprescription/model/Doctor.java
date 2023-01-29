@@ -9,8 +9,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.lang.NonNull;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,7 +20,7 @@ import lombok.Setter;
 public class Doctor extends BaseEntity {
 
 	@Column(unique = true)
-	@NonNull
+	@NotNull
 	@NotEmpty(message = "{email.not.empty}")
 	@Email(message = "{email.not.valid}")
 	private String email;
