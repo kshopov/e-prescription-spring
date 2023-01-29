@@ -51,7 +51,8 @@ public class RegistrationController {
 	
 	@PostMapping({"register"})
 	public String register(@Valid Doctor doctor, 
-			BindingResult bindingResult, final HttpServletRequest request) throws EmailExistsException {
+			BindingResult bindingResult,
+			final HttpServletRequest request) throws EmailExistsException {
 		
 		if(bindingResult.hasErrors()) {
 			return "index/register";
