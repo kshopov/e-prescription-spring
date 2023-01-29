@@ -11,10 +11,12 @@
         </div>
     </div>
 
+    <form th:action="@{/addpatient}" method="post" class="form-horizontal">
+
     <div class="form-row">
         <div class="form-group col-md-2">
             <label for="indentifierType">Тип идентификатор</label>
-            <select id="indentifierType" name="indentifierType" onchange="emptyForm()" class="form-control">
+            <select id="indentifierType" name="identifierType" class="form-control">
                 <option value="1">ЕГН</option>
                 <option value="2">ЛНЧ</option>
                 <option value="3">Социален номер - за чужди граждани</option>
@@ -24,8 +26,7 @@
         </div>
         <div class="form-group col-md-3">
             <label for="inputIdent" id="inputIdentLabel">ЕГН/ЛНЧ/SSN/Паспорт/Друг*</label>
-            <input type="text" class="form-control" id="inputIdent" oninput="validateIdentity()" name="inputIdent"
-                   value="">
+            <input type="text" class="form-control" id="inputIdent" name="identifier">
         </div>
         <div class="form-group col-md-2">
             <label for="inputBirthdate">Дата на раждане*</label>
@@ -34,7 +35,7 @@
             <label style="font-size: 0.7em;" for="inputBirthdate">Формат(ГГГГ-ММ-ДД)</label>
         </div>
         <div class="form-group col-md-1">
-            <label for="inputGender">Пол*</label>
+            <label for="selectGender">Пол*</label>
             <select name="selectGender" id="selectGender" class="form-control">
                 <option value=""></option>
                 <option value="1">Мъж</option>
@@ -57,7 +58,7 @@
             <input type="text" class="form-control" id="inputLName" name="inputLName" oninput="validateLastName()" value="">
         </div>
         <div class="form-group col-md-2">
-            <label for="inputAddress">Телефон</label>
+            <label for="inputPhone">Телефон</label>
             <input type="text" class="form-control" id="inputPhone" name="inputPhone" value="">
         </div>
     </div>
