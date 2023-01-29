@@ -6,6 +6,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
@@ -15,8 +17,10 @@ public class Patient extends BaseEntity {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "identifier_id", referencedColumnName = "id")
+    @NotNull
     private IdentifierType identifierType;
 
+    @NotBlank
     private String identifier;
     private String nhifInsuranceNumber;
     private Date birthDate;
