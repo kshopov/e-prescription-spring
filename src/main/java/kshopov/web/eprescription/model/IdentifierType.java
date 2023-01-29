@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Identifier extends BaseEntity {
+public class IdentifierType extends BaseEntity {
     private String description;
     private String descriptionEN;
     private String sinceVersion;

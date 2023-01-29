@@ -15,8 +15,9 @@ public class Patient extends BaseEntity {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "identifier_id", referencedColumnName = "id")
-    private Identifier identifier;
-    private String indetifier;
+    private IdentifierType identifierType;
+
+    private String identifier;
     private String nhifInsuranceNumber;
     private Date birthDate;
     private Gender gender;
