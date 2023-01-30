@@ -12,16 +12,12 @@
     </div>
 
     <form th:action="@{/addpatient}" method="post" class="form-horizontal">
-
     <div class="form-row">
         <div class="form-group col-md-2">
             <label for="indentifierType">Тип идентификатор</label>
+
             <select id="indentifierType" name="identifierType" class="form-control">
-                <option value="1">ЕГН</option>
-                <option value="2">ЛНЧ</option>
-                <option value="3">Социален номер - за чужди граждани</option>
-                <option value="4">Номер на паспорт</option>
-                <option value="5">Друг идентификатор</option>
+                <option th:each="identifier : ${identifiers}" th:value="${identifier.getId()}" th:text="${identifier.getDescription()}"></option>
             </select>
         </div>
         <div class="form-group col-md-3">
