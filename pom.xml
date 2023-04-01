@@ -14,6 +14,8 @@
 	<description>E Prescription</description>
 	<properties>
 		<java.version>17</java.version>
+		<jacoco.line-coveredratio.min>0.8</jacoco.line-coveredratio.min>
+		<jacoco.branch-coveredratio.min>0.72</jacoco.branch-coveredratio.min>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -66,6 +68,11 @@
 		  <groupId>org.springframework.boot</groupId>
 		  <artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>jacoco-maven-plugin</artifactId>
+			<version>0.8.8</version>
+		</dependency>
 
 	</dependencies>
 
@@ -74,6 +81,60 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.8</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>generate-code-coverage-report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/jacoco-report</outputDirectory>
+							<excludes>
+								<exclude>kshopov/web/eprescription/model/*</exclude>
+							</excludes>
+						</configuration>
+					</execution>
+					<execution>
+						<id>jacoco-check</id>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<rule>
+									<element>BUNDLE</element>
+									<limits>
+										<limit>
+											<counter>LINE</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>${jacoco.line-coveredratio.min}</minimum>
+										</limit>
+										<limit>
+											<counter>BRANCH</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>${jacoco.branch-coveredratio.min}</minimum>
+										</limit>
+									</limits>
+								</rule>
+							</rules>
+							<excludes>
+								<exclude>ch/localsearch/integration/customer/api/model/*</exclude>
+								<exclude>ch/localsearch/integration/salesforce/model/data/*</exclude>
+							</excludes>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
