@@ -1,5 +1,6 @@
 package kshopov.web.eprescription;
 
+import static kshopov.web.eprescription.model.UserType.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,8 @@ import org.springframework.test.annotation.Rollback;
 import kshopov.web.eprescription.model.Doctor;
 import kshopov.web.eprescription.model.UserType;
 import kshopov.web.eprescription.repositories.DoctorRepository;
+
+import java.util.Random;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -29,14 +32,14 @@ public class DoctorRepositoryTest {
 	public void testCreateDoctor() {
 		Doctor doctor = new Doctor();
 		
-		doctor.setEmail("k.shopov@nisetbg.com");
+		doctor.setEmail(getRandomEmail());
 		doctor.setVerified(false);
 		doctor.setLzName("Niset");
 		doctor.setPassword("4567465465");
 		doctor.setPhone("0885474879");
 		doctor.setRcz("1234567890");
 		doctor.setToken("ewqedasjh2i1yh32#!@#");
-		doctor.setTypeOfSender(UserType.MEDIC);
+		doctor.setTypeOfSender(MEDIC);
 		doctor.setUin("1234567890");
 		
 		Doctor savedDoctor = doctorRepository.save(doctor);
@@ -44,5 +47,20 @@ public class DoctorRepositoryTest {
 		Doctor existUser = entityManager.find(Doctor.class, savedDoctor.getId());
 		
 		assertThat(existUser.getEmail()).isEqualTo(doctor.getEmail());
+	}
+
+	private String getRandomEmail() {
+		int leftLimit = 97; // letter 'a'
+		int rightLimit = 122; // letter 'z'
+		int targetStringLength = 10;
+		Random random = new Random();
+		StringBuilder buffer = new StringBuilder(targetStringLength);
+		for (int i = 0; i < targetStringLength; i++) {
+			int randomLimitedInt = leftLimit + (int)
+					(random.nextFloat() * (rightLimit - leftLimit + 1));
+			buffer.append((char) randomLimitedInt);
+		}
+
+		return buffer.toString() + "@gmail.com";
 	}
 }
