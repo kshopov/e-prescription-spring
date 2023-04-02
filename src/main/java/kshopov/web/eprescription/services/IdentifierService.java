@@ -1,14 +1,14 @@
 package kshopov.web.eprescription.services;
 
-import kshopov.web.eprescription.model.Identifier;
+import kshopov.web.eprescription.model.IdentifierType;
 
 public interface IdentifierService {
 
-    public Identifier insertIdentifier(Identifier identifier);
+    public IdentifierType insertIdentifier(IdentifierType identifier);
 
-    public Iterable<Identifier> saveAll(Iterable<Identifier> identifiers);
+    public Iterable<IdentifierType> saveAll(Iterable<IdentifierType> identifiers);
 
-    public Iterable<Identifier> getAll();
+    public Iterable<IdentifierType> getAll();
 
     public long count();
 
