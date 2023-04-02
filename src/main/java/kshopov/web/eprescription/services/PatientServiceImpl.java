@@ -2,7 +2,9 @@ package kshopov.web.eprescription.services;
 
 import kshopov.web.eprescription.model.Patient;
 import kshopov.web.eprescription.repositories.PatientRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PatientServiceImpl implements PatientService {
 
     private final PatientRepository patientRepository;
@@ -28,7 +30,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Patient registerPatient(Patient patient) {
-        return null;
+        return patientRepository.save(patient);
     }
 
     @Override
