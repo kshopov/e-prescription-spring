@@ -3,7 +3,7 @@ package kshopov.web.eprescription.controllers;
 import kshopov.web.eprescription.model.Doctor;
 import kshopov.web.eprescription.model.PasswordResetToken;
 import kshopov.web.eprescription.repositories.PasswordResetTokenRepository;
-import kshopov.web.eprescription.security.UserDetailsService;
+import kshopov.web.eprescription.security.UserDetailsServiceImpl;
 import kshopov.web.eprescription.services.DoctorService;
 import kshopov.web.eprescription.services.EmailService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,13 +26,13 @@ public class ResetPasswordController {
     private final DoctorService doctorService;
     private final PasswordResetTokenRepository passwordResetTokenRepository;
     private final EmailService emailService;
-    private final UserDetailsService userDetailsService;
+    private final UserDetailsServiceImpl userDetailsService;
 
 
     public ResetPasswordController(DoctorService doctorService,
                                    PasswordResetTokenRepository passwordResetTokenRepository,
                                    EmailService emailService,
-                                   UserDetailsService userDetailsService) {
+                                   UserDetailsServiceImpl userDetailsService) {
         this.doctorService = doctorService;
         this.passwordResetTokenRepository = passwordResetTokenRepository;
         this.emailService = emailService;

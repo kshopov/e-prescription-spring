@@ -19,7 +19,7 @@ import kshopov.web.eprescription.model.Doctor;
 import kshopov.web.eprescription.model.VerificationToken;
 import kshopov.web.eprescription.repositories.PasswordResetTokenRepository;
 import kshopov.web.eprescription.repositories.VerificationTokenRepository;
-import kshopov.web.eprescription.security.UserDetailsService;
+import kshopov.web.eprescription.security.UserDetailsServiceImpl;
 import kshopov.web.eprescription.services.DoctorService;
 import kshopov.web.eprescription.services.EmailService;
 import kshopov.web.eprescription.validation.EmailExistsException;
@@ -30,13 +30,13 @@ public class RegistrationController {
 	private final EmailService emailService;
 	private final DoctorService doctorService;
 	private final PasswordResetTokenRepository passwordResetTokenRepository;
-	private final UserDetailsService userDetailsService;
+	private final UserDetailsServiceImpl userDetailsService;
 	
 	public RegistrationController(DoctorService doctorService,
 			VerificationTokenRepository verificationTokenRepository,
 			EmailService emailService,
 			PasswordResetTokenRepository passwordResetTokenRepository,
-			UserDetailsService userDetailsService) {
+			UserDetailsServiceImpl userDetailsService) {
 		this.doctorService = doctorService;
 		this.verificationTokenRepository = verificationTokenRepository;
 		this.emailService = emailService;
