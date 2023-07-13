@@ -1,6 +1,5 @@
 package kshopov.web.eprescription.controllers;
 
-import kshopov.web.eprescription.model.IdentifierType;
 import kshopov.web.eprescription.model.Patient;
 import kshopov.web.eprescription.services.IdentifierService;
 import kshopov.web.eprescription.services.PatientService;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class PatientController {
@@ -27,9 +24,7 @@ public class PatientController {
 
     @GetMapping({  "addpatient"})
     public String addPatientForm(Model model) {
-        System.out.println("Get add patient");
-
-        model.addAttribute("identifiers", getIdentifierTypes());
+        model.addAttribute("identifiers", identifierService.getAll());
 
         return "patient/addpatient";
     }
@@ -43,16 +38,6 @@ public class PatientController {
         patientService.registerPatient(patient);
 
         return "redirect:/index";
-    }
-
-    private List<IdentifierType> getIdentifierTypes() {
-        List<IdentifierType> identifierTypes = new ArrayList<>();
-        Iterable<IdentifierType> identifiers = identifierService.getAll();
-        for (IdentifierType identifier : identifiers) {
-            identifierTypes.add(identifier);
-        }
-
-        return identifierTypes;
     }
 
 }
