@@ -4,6 +4,9 @@ import kshopov.web.eprescription.model.IdentifierType;
 import kshopov.web.eprescription.repositories.IdentifierRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class IdentifierServiceImpl implements IdentifierService {
 
@@ -19,8 +22,14 @@ public class IdentifierServiceImpl implements IdentifierService {
     }
 
     @Override
-    public Iterable<IdentifierType> getAll() {
-        return identifierRepository.findAll();
+    public List<IdentifierType> getAll() {
+        List<IdentifierType> identifierTypes = new ArrayList<>();
+        Iterable<IdentifierType> identifiers = identifierRepository.findAll();
+        for (IdentifierType identifier : identifiers) {
+            identifierTypes.add(identifier);
+        }
+
+        return identifierTypes;
     }
 
     @Override
