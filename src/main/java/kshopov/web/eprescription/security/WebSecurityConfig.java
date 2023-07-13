@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.rememberme.*;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -16,17 +17,17 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	@Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private final UserDetailsService userDetailsService;
     
     private final PasswordEncoder passwordEncoder;
 
 	private final DataSource dataSource;
 	
 	public WebSecurityConfig(PasswordEncoder passwordEncoder,
-			 DataSource dataSource) {
+			 DataSource dataSource, UserDetailsService userDetailsService) {
 		this.passwordEncoder = passwordEncoder;
 		this.dataSource = dataSource;
+		this.userDetailsService = userDetailsService;
 	}
 
 	@Autowired
