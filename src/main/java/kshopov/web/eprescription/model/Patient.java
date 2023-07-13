@@ -9,18 +9,22 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import lombok.Data;
+import kshopov.web.eprescription.validation.IdentifierConstraint;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class Patient extends BaseEntity {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "identifier_id", referencedColumnName = "id")
-    @NotNull
+    @NotNull(message = "Въвели сте некоректно стойност за тип на идентификатор!")
     private IdentifierType identifierType;
 
     @NotBlank
+    @IdentifierConstraint
     private String identifier;
     private String nhifInsuranceNumber;
     private Date birthDate;
@@ -45,5 +49,6 @@ public class Patient extends BaseEntity {
     enum Gender {
         MALE, FEMALE, OTHER, UNKNOWN
     }
+
 
 }
