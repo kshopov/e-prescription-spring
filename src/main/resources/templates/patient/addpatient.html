@@ -5,6 +5,7 @@
 <body>
 <div th:replace="fragments/header :: header">Static header</div>
 <div class="container form-prescription">
+
     <div class="form-row">
         <div class="form-group col-md-12">
             <h4>Лични данни на пациент</h4>
@@ -14,9 +15,9 @@
     <form th:action="@{/addpatient}" method="post" class="form-horizontal">
     <div class="form-row">
         <div class="form-group col-md-2">
-            <label for="indentifierType">Тип идентификатор</label>
+            <label for="identifierType">Тип идентификатор</label>
 
-            <select id="indentifierType" name="identifierType" class="form-control">
+            <select id="identifierType" name="identifierType" class="form-control">
                 <option th:each="identifier : ${identifiers}" th:value="${identifier.getId()}" th:text="${identifier.getDescription()}"></option>
             </select>
         </div>
@@ -26,9 +27,12 @@
         </div>
         <div class="form-group col-md-2">
             <label for="inputBirthdate">Дата на раждане*</label>
-            <input type="text" class="form-control" id="inputBirthdate" name="inputBirthdate"
-                   value="">
-            <label style="font-size: 0.7em;" for="inputBirthdate">Формат(ГГГГ-ММ-ДД)</label>
+            <div class="input-group">
+                <input id="txtDate" type="text" class="form-control date-input" />
+                <label class="input-group-btn" for="txtDate">
+                    <i class="fa fa-calendar"></i>
+                </label>
+            </div>
         </div>
         <div class="form-group col-md-1">
             <label for="selectGender">Пол*</label>
@@ -87,5 +91,12 @@
     </div>
     </form>
 </div>
+<script type="text/javascript">
+    $(function () {
+        $('#txtDate').datepicker({
+            format: "dd/mm/yyyy"
+        });
+    });
+</script>
 </body>
 </html>
