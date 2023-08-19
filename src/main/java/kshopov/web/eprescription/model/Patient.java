@@ -9,7 +9,6 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import kshopov.web.eprescription.validation.IdentifierConstraint;
 import kshopov.web.eprescription.validation.IdentifierTypeConstraint;
 import lombok.*;
 
@@ -17,7 +16,6 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
 @Entity
 @IdentifierTypeConstraint.List({
         @IdentifierTypeConstraint(
