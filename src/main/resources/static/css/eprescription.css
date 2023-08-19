@@ -54,3 +54,14 @@ p.error {
     cursor:default;
     z-index:1001 !important
 }
+
+.fa {
+    position: absolute;
+    right: 10px;
+    top: 11px;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
