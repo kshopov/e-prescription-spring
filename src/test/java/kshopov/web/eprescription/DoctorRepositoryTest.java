@@ -20,17 +20,17 @@ import kshopov.web.eprescription.repositories.DoctorRepository;
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
 public class DoctorRepositoryTest {
-	
+
 	@Autowired
 	private DoctorRepository doctorRepository;
-	
+
 	@Autowired
 	private TestEntityManager entityManager;
 
 	@Test
 	public void testCreateDoctor() {
 		Doctor doctor = new Doctor();
-		
+
 		doctor.setEmail(getRandomEmail());
 		doctor.setVerified(false);
 		doctor.setLzName("Niset");
@@ -40,11 +40,11 @@ public class DoctorRepositoryTest {
 		doctor.setToken("ewqedasjh2i1yh32#!@#");
 		doctor.setTypeOfSender(MEDIC);
 		doctor.setUin("1234567890");
-		
+
 		Doctor savedDoctor = doctorRepository.save(doctor);
-		
+
 		Doctor existUser = entityManager.find(Doctor.class, savedDoctor.getId());
-		
+
 		assertThat(existUser.getEmail()).isEqualTo(doctor.getEmail());
 	}
 
@@ -55,8 +55,7 @@ public class DoctorRepositoryTest {
 		Random random = new Random();
 		StringBuilder buffer = new StringBuilder(targetStringLength);
 		for (int i = 0; i < targetStringLength; i++) {
-			int randomLimitedInt = leftLimit + (int)
-					(random.nextFloat() * (rightLimit - leftLimit + 1));
+			int randomLimitedInt = leftLimit + (int) (random.nextFloat() * (rightLimit - leftLimit + 1));
 			buffer.append((char) randomLimitedInt);
 		}
 

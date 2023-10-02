@@ -18,15 +18,15 @@ import kshopov.web.eprescription.security.oauth2.CustomOAuth2UserService;
 @EnableWebSecurity
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	
-    private final UserDetailsService userDetailsService;
-    private final PasswordEncoder passwordEncoder;
+
+	private final UserDetailsService userDetailsService;
+	private final PasswordEncoder passwordEncoder;
 	private final DataSource dataSource;
 	private final CustomOAuth2UserService oAuth2UserService;
-	
+
 	public WebSecurityConfig(PasswordEncoder passwordEncoder,
-			 DataSource dataSource, UserDetailsService userDetailsService,
-			 CustomOAuth2UserService oAuth2UserService) {
+			DataSource dataSource, UserDetailsService userDetailsService,
+			CustomOAuth2UserService oAuth2UserService) {
 		this.passwordEncoder = passwordEncoder;
 		this.dataSource = dataSource;
 		this.userDetailsService = userDetailsService;
@@ -34,12 +34,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception { 
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth
-			.userDetailsService(userDetailsService)
-			.passwordEncoder(passwordEncoder.bCryptPasswordEncoder());
+				.userDetailsService(userDetailsService)
+				.passwordEncoder(passwordEncoder.bCryptPasswordEncoder());
 	}
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception { // @formatter:off
 		http
@@ -81,7 +81,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		jdbcTokenRepository.setDataSource(dataSource);
 		return jdbcTokenRepository;
 	}
-	
-
 
 }

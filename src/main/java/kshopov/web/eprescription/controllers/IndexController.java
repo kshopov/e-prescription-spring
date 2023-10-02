@@ -6,21 +6,21 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Controller
-public class IndexController implements WebMvcConfigurer{
-	
+public class IndexController implements WebMvcConfigurer {
+
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("successful_registration").setViewName("index/successful_registration");
 	}
-	
-	@GetMapping({"", "/", "index", "index.html"})
+
+	@GetMapping({ "", "/", "index", "index.html" })
 	public String index() {
 		return "index/index";
 	}
-	
+
 	@GetMapping("/login")
 	public String login() {
 		return "loginPage";
 	}
-	
+
 }

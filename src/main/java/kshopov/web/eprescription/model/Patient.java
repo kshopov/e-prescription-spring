@@ -18,11 +18,7 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @IdentifierTypeConstraint.List({
-        @IdentifierTypeConstraint(
-                identifierType = "identifierType",
-                identifier = "identifier",
-                message = "Идентификаторът не е валиден спрямо типа, който сте избрали!"
-        )
+        @IdentifierTypeConstraint(identifierType = "identifierType", identifier = "identifier", message = "Идентификаторът не е валиден спрямо типа, който сте избрали!")
 })
 public class Patient extends BaseEntity {
 
@@ -32,7 +28,7 @@ public class Patient extends BaseEntity {
     private IdentifierType identifierType;
 
     @NotBlank
-    //@IdentifierConstraint
+    // @IdentifierConstraint
     private String identifier;
     private String nhifInsuranceNumber;
     private LocalDate birthDate;
@@ -53,10 +49,9 @@ public class Patient extends BaseEntity {
     private boolean isPregnant;
     private boolean isBreastFeeding;
 
-    //CL001
+    // CL001
     enum Gender {
         MALE, FEMALE, OTHER, UNKNOWN
     }
-
 
 }
