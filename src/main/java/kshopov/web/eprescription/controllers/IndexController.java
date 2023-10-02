@@ -19,7 +19,7 @@ public class IndexController implements WebMvcConfigurer{
 	}
 	
 	@GetMapping("/login")
-	public String list() {
+	public String login() {
 		return "loginPage";
 	}
 	
