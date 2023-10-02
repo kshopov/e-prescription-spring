@@ -1,7 +1,9 @@
 package kshopov.web.eprescription;
 
-import static kshopov.web.eprescription.model.UserType.*;
+import static kshopov.web.eprescription.model.UserType.MEDIC;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
 import kshopov.web.eprescription.model.Doctor;
-import kshopov.web.eprescription.model.UserType;
 import kshopov.web.eprescription.repositories.DoctorRepository;
-
-import java.util.Random;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
